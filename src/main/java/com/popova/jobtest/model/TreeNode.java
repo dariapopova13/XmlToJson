@@ -2,6 +2,7 @@ package com.popova.jobtest.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 public class TreeNode implements Serializable {
 
@@ -10,6 +11,21 @@ public class TreeNode implements Serializable {
     private List<TreeNode> children;
 
     public TreeNode() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TreeNode treeNode = (TreeNode) o;
+        return Double.compare(treeNode.value, value) == 0 &&
+                Objects.equals(name, treeNode.name) &&
+                Objects.equals(children, treeNode.children);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, name, children);
     }
 
     public TreeNode(double value, String name, List<TreeNode> children) {
